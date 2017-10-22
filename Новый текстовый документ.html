@@ -1,0 +1,30 @@
+<form action="obrabotka.php" method="POST">
+
+Ваше имя:<br> 
+<input type="text" name ="person">
+<br>
+Ваш e-mail:<br>
+<input type="text" name ="e-mail">
+<br>
+Ваш вопрос администратору: <br> 
+<textarea name="question" cols=40 rows=5></textarea>
+<br>
+<input type="submit" name="button" value="отправить">
+
+</form>
+<?php
+// Проверяем, была ли нажата кнопка отправки почты и только в этом случае, отправляем письмо
+if (isset($_POST['button']))
+{
+//указываем адрес получателя:
+$komu="pavelwppw32@yandex.ru";
+//Указываем тему письма
+$tema="Вопрос с сайта sait.ru";
+//формируем само письмо
+$text="Пользователь ".$_POST['person'].", указавший электронную почту ".$_POST['e-mail'].", задал Вам следующий вопрос: <br>".$_POST['question'];
+//Отправляем письмо
+mail($komu,$tema,$text);
+//Уведомляем о успешной отправке
+echo"<br>Спасибо! Ваш вопрос успешно отправлен администратору";
+}
+?>
